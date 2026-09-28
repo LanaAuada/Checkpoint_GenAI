@@ -1,0 +1,35 @@
+# --------------------------------------------------------------------------
+# IMPORTANTE: o PyTorch NÃO está aqui de propósito.
+# Instale-o ANTES, com o índice CUDA correto:
+#
+#   pip install torch --index-url https://download.pytorch.org/whl/cu128
+#
+# Confira o índice atual em https://pytorch.org/get-started/locally/
+# Se instalar `torch` a partir do PyPI comum você recebe a build CPU,
+# e nada nesta disciplina vai usar a GPU.
+# --------------------------------------------------------------------------
+
+transformers>=4.46
+datasets>=3.0
+accelerate>=1.0
+peft>=0.13
+trl>=0.12
+
+# RAG
+sentence-transformers>=3.0
+faiss-cpu>=1.8
+rank-bm25>=0.2.2
+PyMuPDF>=1.24
+pypdf>=5.0
+
+# utilidades
+numpy
+matplotlib
+huggingface_hub[cli]
+
+# opcional — QLoRA 4-bit. No Windows nativo pode falhar; nesse caso use
+# LoRA em bf16 (funciona igual para tudo o que a disciplina faz) ou WSL2.
+bitsandbytes>=0.44 ; platform_system != "Darwin"
+
+# opcional — JSON garantido por decodificação restrita (Aula 8, Rota 5)
+# outlines>=0.1
