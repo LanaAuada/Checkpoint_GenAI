@@ -100,7 +100,7 @@ respostas de avaliação na sequência — por isso é maior que o pico de
 
 Execução completa da varredura (as 6 rodadas e a tabela final):
 
-![Varredura rodando](prints/varredura_run.png)
+![Varredura rodando](codegen/prints/varredura_run.png)
 
 ## 5. Avaliação do modelo
 
@@ -117,7 +117,7 @@ a praticamente todas as variações do que foi treinado.
 
 Execução da avaliação do modelo treinado (placar item a item):
 
-![Avaliação do modelo treinado](prints/avaliacao_treinado.png)
+![Avaliação do modelo treinado](codegen/prints/avaliacao_treinado.png)
 
 ## 6. GPU
 
@@ -133,23 +133,23 @@ Print da instalação do PyTorch com CUDA e do início do
 `a7_00_smoke_test.py`, confirmando `torch.cuda.is_available()` e a GPU
 detectada:
 
-![Instalação e verificação do CUDA](prints/teste.png)
+![Instalação e verificação do CUDA](codegen/prints/teste.png)
 
 Print do download do modelo pelo Hugging Face, na sequência do mesmo
 smoke test:
 
-![Download do modelo pelo smoke test](prints/teste2.png)
+![Download do modelo pelo smoke test](codegen/prints/teste2.png)
 
 Print do ambiente validado (`a7_00_smoke_test.py`, terminando em
 `AMBIENTE OK`):
 
-![Ambiente OK no VSCode](prints/ambiente_ok.png)
+![Ambiente OK no VSCode](codegen/prints/ambiente_ok.png)
 
 Print do treino em execução, com `nvidia-smi` lado a lado mostrando a GPU
 em uso real (3913 MiB / 4096 MiB, GPU-Util 63%) e a loss caindo a cada
 passo:
 
-![Treino usando a GPU](prints/treino_gpu.png)
+![Treino usando a GPU](codegen/prints/treino_gpu.png)
 
 ## 7. Frontend
 
@@ -163,7 +163,7 @@ python app_beleza.py
 ```
 Abre em `http://127.0.0.1:7860`.
 
-![Frontend em uso](prints/frontend.png)
+![Frontend em uso](codegen/prints/frontend.png)
 
 ---
 
