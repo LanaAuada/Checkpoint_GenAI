@@ -52,7 +52,7 @@ print(f"Hardware: {device}")
 tokenizer = AutoTokenizer.from_pretrained(MODELO)
 if tokenizer.pad_token is None:
     tokenizer.pad_token = tokenizer.eos_token
-model = AutoModelForCausalLM.from_pretrained(MODELO).to(device)
+model = AutoModelForCausalLM.from_pretrained(MODELO).to(device).float()
 
 treino = [json.loads(l) for l in open("dados/treino.jsonl", encoding="utf-8")]
 teste = [json.loads(l) for l in open("dados/teste.jsonl", encoding="utf-8")]

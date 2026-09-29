@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+*.pyc
+runs/
+codegen/modelo-treinado/
+codegen/resultados/
+.cache/

@@ -1,0 +1,538 @@
+[
+  {
+    "familia": "hidratante/oleosa",
+    "tarefa": "Indique um produto hidratante para uma pele oleosa.",
+    "codigo": "Para pele oleosa, recomendo gel-creme oil-free com niacinamida. Use de manhã e à noite.",
+    "testes": [
+      "oil-free"
+    ],
+    "tipo": "variacao",
+    "gerado": "```\n1\n```",
+    "passou": false,
+    "erro": "faltou: oil-free"
+  },
+  {
+    "familia": "hidratante/seca",
+    "tarefa": "Preciso de um hidratante para quem tem pele seca. O que devo usar?",
+    "codigo": "Para pele seca, recomendo creme rico com ceramidas. Use de manhã e à noite.",
+    "testes": [
+      "ceramidas"
+    ],
+    "tipo": "variacao",
+    "gerado": "O que é usado é a seguinte:\n\n- A hidratante é um seu pedido.\n- A hidratante é um seu pedido.\n- A hidratante é um seu pedido.\n- A hidratante é um seu pedido.\n- A hidratante é um seu pedido.\n- A hidratante é um seu pedido.\n- A hidratante é um seu pedido.\n- A hidratante é um seu pedido.\n- A hidratante é um seu pedido.\n- A hidratante é um seu pedido.\n- A hidratante é",
+    "passou": false,
+    "erro": "faltou: ceramidas"
+  },
+  {
+    "familia": "hidratante/mista",
+    "tarefa": "Indique um produto hidratante para quem tem pele mista.",
+    "codigo": "Para pele mista, recomendo emulsão hidratante leve. Use de manhã e à noite.",
+    "testes": [
+      "emulsão"
+    ],
+    "tipo": "variacao",
+    "gerado": "```\n1\n```",
+    "passou": false,
+    "erro": "faltou: emulsão"
+  },
+  {
+    "familia": "hidratante/sensível",
+    "tarefa": "Que creme hidratante é bom para quem tem pele sensível?",
+    "codigo": "Para pele sensível, recomendo creme calmante com pantenol. Use de manhã e à noite.",
+    "testes": [
+      "calmante"
+    ],
+    "tipo": "variacao",
+    "gerado": "O que tem pele sensível é bom para quem tem pele sensível.",
+    "passou": false,
+    "erro": "faltou: calmante"
+  },
+  {
+    "familia": "hidratante/normal",
+    "tarefa": "Que creme hidratante é bom para quem tem pele normal?",
+    "codigo": "Para pele normal, recomendo loção hidratante leve. Use de manhã e à noite.",
+    "testes": [
+      "loção hidratante"
+    ],
+    "tipo": "variacao",
+    "gerado": "O que é bom é que o pele normal tem pele normal.",
+    "passou": false,
+    "erro": "faltou: loção hidratante"
+  },
+  {
+    "familia": "limpeza/oleosa",
+    "tarefa": "Recomende um produto de limpeza para uma pele oleosa.",
+    "codigo": "Para pele oleosa, use gel de limpeza com ácido salicílico, uma ou duas vezes ao dia, sem esfregar.",
+    "testes": [
+      "ácido salicílico"
+    ],
+    "tipo": "variacao",
+    "gerado": "```\n1\n```",
+    "passou": false,
+    "erro": "faltou: ácido salicílico"
+  },
+  {
+    "familia": "limpeza/seca",
+    "tarefa": "Recomende um produto de limpeza para pele seca.",
+    "codigo": "Para pele seca, use sabonete líquido cremoso sem sulfato, uma ou duas vezes ao dia, sem esfregar.",
+    "testes": [
+      "sem sulfato"
+    ],
+    "tipo": "variacao",
+    "gerado": "```\n1\n```",
+    "passou": false,
+    "erro": "faltou: sem sulfato"
+  },
+  {
+    "familia": "limpeza/mista",
+    "tarefa": "Qual limpador facial você indica para pele mista?",
+    "codigo": "Para pele mista, use espuma de limpeza suave, uma ou duas vezes ao dia, sem esfregar.",
+    "testes": [
+      "espuma"
+    ],
+    "tipo": "variacao",
+    "gerado": "Para pele mista você precisa ser um pedido de você que pode ser um pedido de você que pode ser um pedido de você que pode ser um pedido de você que pode ser um pedido de você que pode ser um pedido de você que pode ser um pedido de você que pode ser um pedido de você que pode ser um pedido de você que pode ser um pedido de você que pode ser um pedido de você que pode ser um pedido de você que pode ser um pedido de você que pode ser um pedido de você que pode",
+    "passou": false,
+    "erro": "faltou: espuma"
+  },
+  {
+    "familia": "limpeza/sensível",
+    "tarefa": "Qual a melhor forma de limpar o rosto para uma pele sensível?",
+    "codigo": "Para pele sensível, use sabonete líquido sem perfume, uma ou duas vezes ao dia, sem esfregar.",
+    "testes": [
+      "sem perfume"
+    ],
+    "tipo": "variacao",
+    "gerado": "O rosto é um pouco mais comum, mas o que é mais importante é a melhor forma de limpar o rosto.",
+    "passou": false,
+    "erro": "faltou: sem perfume"
+  },
+  {
+    "familia": "limpeza/normal",
+    "tarefa": "Qual limpador facial você indica para pele normal?",
+    "codigo": "Para pele normal, use gel de limpeza suave, uma ou duas vezes ao dia, sem esfregar.",
+    "testes": [
+      "gel de limpeza suave"
+    ],
+    "tipo": "variacao",
+    "gerado": "Pedido:\nQual limpador facial você indica para pele normal?",
+    "passou": false,
+    "erro": "faltou: gel de limpeza suave"
+  },
+  {
+    "familia": "protetor/oleosa",
+    "tarefa": "Qual protetor solar você recomenda para uma pele oleosa?",
+    "codigo": "Para pele oleosa, escolha protetor solar em gel oil-free FPS 50. Reaplique a cada 2 a 3 horas se ficar no sol.",
+    "testes": [
+      "em gel"
+    ],
+    "tipo": "variacao",
+    "gerado": "O que você precisa de é um pele oleosa?",
+    "passou": false,
+    "erro": "faltou: em gel"
+  },
+  {
+    "familia": "protetor/seca",
+    "tarefa": "Preciso de protetor solar para quem tem pele seca.",
+    "codigo": "Para pele seca, escolha protetor solar cremoso hidratante FPS 50. Reaplique a cada 2 a 3 horas se ficar no sol.",
+    "testes": [
+      "cremoso hidratante"
+    ],
+    "tipo": "variacao",
+    "gerado": "O valor de 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "passou": false,
+    "erro": "faltou: cremoso hidratante"
+  },
+  {
+    "familia": "protetor/mista",
+    "tarefa": "Preciso de protetor solar para uma pele mista.",
+    "codigo": "Para pele mista, escolha protetor solar fluido de toque seco FPS 50. Reaplique a cada 2 a 3 horas se ficar no sol.",
+    "testes": [
+      "toque seco"
+    ],
+    "tipo": "variacao",
+    "gerado": "Para o uso de protetor solar, precisamos de um valor de 1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "passou": false,
+    "erro": "faltou: toque seco"
+  },
+  {
+    "familia": "protetor/sensível",
+    "tarefa": "Que protetor solar é bom para uma pele sensível?",
+    "codigo": "Para pele sensível, escolha protetor solar mineral com óxido de zinco FPS 50. Reaplique a cada 2 a 3 horas se ficar no sol.",
+    "testes": [
+      "mineral"
+    ],
+    "tipo": "variacao",
+    "gerado": "O que é bom é que o pele seja um pele sensível.",
+    "passou": false,
+    "erro": "faltou: mineral"
+  },
+  {
+    "familia": "protetor/normal",
+    "tarefa": "Preciso de protetor solar para pele normal.",
+    "codigo": "Para pele normal, escolha protetor solar em loção FPS 50. Reaplique a cada 2 a 3 horas se ficar no sol.",
+    "testes": [
+      "em loção"
+    ],
+    "tipo": "variacao",
+    "gerado": "Para pele normal, o seu seu seu seu seu seu seu seu seu seu seu seu seu seu seu seu seu seu seu seu seu seu seu seu seu seu seu seu seu seu seu seu seu seu seu seu seu seu seu seu seu seu seu seu seu seu seu seu seu seu seu seu seu seu seu seu seu seu seu seu seu seu seu seu seu seu seu seu seu seu seu",
+    "passou": false,
+    "erro": "faltou: em loção"
+  },
+  {
+    "familia": "ativo/oleosa",
+    "tarefa": "Qual ingrediente ativo é bom para quem tem pele oleosa?",
+    "codigo": "O ativo indicado para pele oleosa é niacinamida: ela ajuda a equilibrar a oleosidade e a refinar os poros.",
+    "testes": [
+      "niacinamida"
+    ],
+    "tipo": "variacao",
+    "gerado": "O ingrediente que tem bom ativo é bom oleosa.",
+    "passou": false,
+    "erro": "faltou: niacinamida"
+  },
+  {
+    "familia": "ativo/seca",
+    "tarefa": "Qual ingrediente ativo é bom para pele seca?",
+    "codigo": "O ativo indicado para pele seca é ácido hialurônico: ele retém água na pele e reduz a sensação de repuxar.",
+    "testes": [
+      "ácido hialurônico"
+    ],
+    "tipo": "variacao",
+    "gerado": "O ingrediente que foi ativo é bom para pele seca.",
+    "passou": false,
+    "erro": "faltou: ácido hialurônico"
+  },
+  {
+    "familia": "ativo/mista",
+    "tarefa": "Indique um ativo para pele mista.",
+    "codigo": "O ativo indicado para pele mista é niacinamida: ela equilibra a zona T sem ressecar as bochechas.",
+    "testes": [
+      "niacinamida"
+    ],
+    "tipo": "variacao",
+    "gerado": "```\n1\n```",
+    "passou": false,
+    "erro": "faltou: niacinamida"
+  },
+  {
+    "familia": "ativo/sensível",
+    "tarefa": "Indique um ativo para pele sensível.",
+    "codigo": "O ativo indicado para pele sensível é centella asiática: ela acalma a pele e reduz a vermelhidão.",
+    "testes": [
+      "centella asiática"
+    ],
+    "tipo": "variacao",
+    "gerado": "```\n1\n```",
+    "passou": false,
+    "erro": "faltou: centella asiática"
+  },
+  {
+    "familia": "ativo/normal",
+    "tarefa": "Qual ativo você recomenda para pele normal?",
+    "codigo": "O ativo indicado para pele normal é vitamina C: ela uniformiza o tom e ajuda a proteger a pele.",
+    "testes": [
+      "vitamina C"
+    ],
+    "tipo": "variacao",
+    "gerado": "Para que você pode pele normal, você deve ter um número de 1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "passou": false,
+    "erro": "faltou: vitamina C"
+  },
+  {
+    "familia": "rotina_manha/oleosa",
+    "tarefa": "Crie minha rotina de manhã para quem tem pele oleosa.",
+    "codigo": "Rotina da manhã para pele oleosa: 1) gel de limpeza com ácido salicílico; 2) gel-creme oil-free com niacinamida; 3) protetor solar em gel oil-free FPS 50.",
+    "testes": [
+      "ácido salicílico",
+      "oil-free",
+      "em gel"
+    ],
+    "tipo": "variacao",
+    "gerado": "O que você precisa de, por exemplo, deve ser o seu nome, a sua idade, a sua peso, a sua altura, a sua altura, a sua altura, a sua altura, a sua altura, a sua altura, a sua altura, a sua altura, a sua altura, a sua altura, a sua altura, a sua altura, a sua altura, a sua altura, a sua altura, a sua altura, a sua altura, a sua altura, a sua altura, a sua",
+    "passou": false,
+    "erro": "faltou: ácido salicílico, oil-free, em gel"
+  },
+  {
+    "familia": "rotina_manha/seca",
+    "tarefa": "Qual rotina matinal você indica para pele seca?",
+    "codigo": "Rotina da manhã para pele seca: 1) sabonete líquido cremoso sem sulfato; 2) creme rico com ceramidas; 3) protetor solar cremoso hidratante FPS 50.",
+    "testes": [
+      "sem sulfato",
+      "ceramidas",
+      "cremoso hidratante"
+    ],
+    "tipo": "variacao",
+    "gerado": "O que você precisa de?",
+    "passou": false,
+    "erro": "faltou: sem sulfato, ceramidas, cremoso hidratante"
+  },
+  {
+    "familia": "rotina_manha/mista",
+    "tarefa": "Me ajude com uma rotina de manhã para quem tem pele mista.",
+    "codigo": "Rotina da manhã para pele mista: 1) espuma de limpeza suave; 2) emulsão hidratante leve; 3) protetor solar fluido de toque seco FPS 50.",
+    "testes": [
+      "espuma",
+      "emulsão",
+      "toque seco"
+    ],
+    "tipo": "variacao",
+    "gerado": "O que você pode fazer é a seguir:\n\n- Ao selecionar o seu nome, o seu nome e o seu número de idade.\n- Ao selecionar o seu nome, o seu nome e o seu número de idade.\n- Ao selecionar o seu nome, o seu nome e o seu número de idade.\n- Ao selecionar o seu nome, o seu nome e o seu número de idade.\n- Ao sele",
+    "passou": false,
+    "erro": "faltou: espuma, emulsão, toque seco"
+  },
+  {
+    "familia": "rotina_manha/sensível",
+    "tarefa": "Me ajude com uma rotina de manhã para pele sensível.",
+    "codigo": "Rotina da manhã para pele sensível: 1) sabonete líquido sem perfume; 2) creme calmante com pantenol; 3) protetor solar mineral com óxido de zinco FPS 50.",
+    "testes": [
+      "sem perfume",
+      "calmante",
+      "mineral"
+    ],
+    "tipo": "variacao",
+    "gerado": "O que você pode fazer é a seguir:\n\n```\n1. Ao selecionar o seu nome, selecione o seu nome.\n2. Ao selecionar o seu nome, selecione o seu nome.\n3. Ao selecionar o seu nome, selecione o seu nome.\n4. Ao selecionar o seu nome, selecione o seu nome.\n5. Ao selecionar o seu nome, selecione o seu nome.\n6.",
+    "passou": false,
+    "erro": "faltou: sem perfume, calmante, mineral"
+  },
+  {
+    "familia": "rotina_manha/normal",
+    "tarefa": "Crie minha rotina de manhã para uma pele normal.",
+    "codigo": "Rotina da manhã para pele normal: 1) gel de limpeza suave; 2) loção hidratante leve; 3) protetor solar em loção FPS 50.",
+    "testes": [
+      "gel de limpeza suave",
+      "loção hidratante",
+      "em loção"
+    ],
+    "tipo": "variacao",
+    "gerado": "O que você precisa de fazer é criar uma pele normal.",
+    "passou": false,
+    "erro": "faltou: gel de limpeza suave, loção hidratante, em loção"
+  },
+  {
+    "familia": "rotina_noite/oleosa",
+    "tarefa": "Me ajude com uma rotina de noite para pele oleosa.",
+    "codigo": "Rotina da noite para pele oleosa: 1) gel de limpeza com ácido salicílico; 2) sérum com niacinamida; 3) gel-creme oil-free com niacinamida.",
+    "testes": [
+      "ácido salicílico",
+      "niacinamida",
+      "oil-free"
+    ],
+    "tipo": "variacao",
+    "gerado": "O que você pode fazer é a seguir:\n\n```\n<NAME>\n```",
+    "passou": false,
+    "erro": "faltou: ácido salicílico, niacinamida, oil-free"
+  },
+  {
+    "familia": "rotina_noite/seca",
+    "tarefa": "Qual rotina noturna você indica para pele seca?",
+    "codigo": "Rotina da noite para pele seca: 1) sabonete líquido cremoso sem sulfato; 2) sérum com ácido hialurônico; 3) creme rico com ceramidas.",
+    "testes": [
+      "sem sulfato",
+      "ácido hialurônico",
+      "ceramidas"
+    ],
+    "tipo": "variacao",
+    "gerado": "O que você indica é a seguinte:\n\n- \"Pedido:\nQual rotina noturna você indica para pele seca?\"",
+    "passou": false,
+    "erro": "faltou: sem sulfato, ácido hialurônico, ceramidas"
+  },
+  {
+    "familia": "rotina_noite/mista",
+    "tarefa": "Crie minha rotina de noite para uma pele mista.",
+    "codigo": "Rotina da noite para pele mista: 1) espuma de limpeza suave; 2) sérum com niacinamida; 3) emulsão hidratante leve.",
+    "testes": [
+      "espuma",
+      "niacinamida",
+      "emulsão"
+    ],
+    "tipo": "variacao",
+    "gerado": "O que você precisa de, por exemplo, ao criar uma pele mista, é que você precisa de um minha rotina de noite para uma pele mista.",
+    "passou": false,
+    "erro": "faltou: espuma, niacinamida, emulsão"
+  },
+  {
+    "familia": "rotina_noite/sensível",
+    "tarefa": "Crie minha rotina de noite para uma pele sensível.",
+    "codigo": "Rotina da noite para pele sensível: 1) sabonete líquido sem perfume; 2) sérum com centella asiática; 3) creme calmante com pantenol.",
+    "testes": [
+      "sem perfume",
+      "centella asiática",
+      "calmante"
+    ],
+    "tipo": "variacao",
+    "gerado": "O que você precisa de fazer é criar uma pele sensível que pode ser usado para aplicar ao seu programa.",
+    "passou": false,
+    "erro": "faltou: sem perfume, centella asiática, calmante"
+  },
+  {
+    "familia": "rotina_noite/normal",
+    "tarefa": "Qual rotina noturna você indica para pele normal?",
+    "codigo": "Rotina da noite para pele normal: 1) gel de limpeza suave; 2) sérum com vitamina C; 3) loção hidratante leve.",
+    "testes": [
+      "gel de limpeza suave",
+      "vitamina C",
+      "loção hidratante"
+    ],
+    "tipo": "variacao",
+    "gerado": "O que você indica é a rotina que você deseja pele normal?",
+    "passou": false,
+    "erro": "faltou: gel de limpeza suave, vitamina C, loção hidratante"
+  },
+  {
+    "familia": "acne",
+    "tarefa": "Qual rotina você indica para acne?",
+    "codigo": "Para acne, use gel de limpeza com ácido salicílico, hidratante oil-free e protetor solar sem óleo. Não esprema as espinhas.",
+    "testes": [
+      "ácido salicílico",
+      "oil-free"
+    ],
+    "tipo": "inedita",
+    "gerado": "1. 1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1",
+    "passou": false,
+    "erro": "faltou: ácido salicílico, oil-free"
+  },
+  {
+    "familia": "acne",
+    "tarefa": "Que produto ajuda com acne?",
+    "codigo": "Para acne, use gel de limpeza com ácido salicílico, hidratante oil-free e protetor solar sem óleo. Não esprema as espinhas.",
+    "testes": [
+      "ácido salicílico",
+      "oil-free"
+    ],
+    "tipo": "inedita",
+    "gerado": "Pedido:\nQue produto ajuda com acne?",
+    "passou": false,
+    "erro": "faltou: ácido salicílico, oil-free"
+  },
+  {
+    "familia": "acne",
+    "tarefa": "Tenho espinhas. O que devo usar?",
+    "codigo": "Para espinhas, use gel de limpeza com ácido salicílico, hidratante oil-free e protetor solar sem óleo. Não esprema as espinhas.",
+    "testes": [
+      "ácido salicílico",
+      "oil-free"
+    ],
+    "tipo": "inedita",
+    "gerado": "O que é usado?",
+    "passou": false,
+    "erro": "faltou: ácido salicílico, oil-free"
+  },
+  {
+    "familia": "acne",
+    "tarefa": "Me recomende algo para acne.",
+    "codigo": "Para acne, use gel de limpeza com ácido salicílico, hidratante oil-free e protetor solar sem óleo. Não esprema as espinhas.",
+    "testes": [
+      "ácido salicílico",
+      "oil-free"
+    ],
+    "tipo": "inedita",
+    "gerado": "Para que você seja acreditado, você deve ser um dos personagem que está aprendendo a conversa de pedido.",
+    "passou": false,
+    "erro": "faltou: ácido salicílico, oil-free"
+  },
+  {
+    "familia": "manchas",
+    "tarefa": "Me recomende algo para manchas.",
+    "codigo": "Para manchas, use vitamina C de manhã, protetor solar FPS 50 todos os dias e ácido azelaico à noite.",
+    "testes": [
+      "vitamina C",
+      "FPS 50"
+    ],
+    "tipo": "inedita",
+    "gerado": "```\n1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1",
+    "passou": false,
+    "erro": "faltou: vitamina C, FPS 50"
+  },
+  {
+    "familia": "manchas",
+    "tarefa": "Qual rotina você indica para manchas no rosto?",
+    "codigo": "Para manchas no rosto, use vitamina C de manhã, protetor solar FPS 50 todos os dias e ácido azelaico à noite.",
+    "testes": [
+      "vitamina C",
+      "FPS 50"
+    ],
+    "tipo": "inedita",
+    "gerado": "O que você indica é o que você faz.",
+    "passou": false,
+    "erro": "faltou: vitamina C, FPS 50"
+  },
+  {
+    "familia": "manchas",
+    "tarefa": "Tenho manchas no rosto. O que devo usar?",
+    "codigo": "Para manchas no rosto, use vitamina C de manhã, protetor solar FPS 50 todos os dias e ácido azelaico à noite.",
+    "testes": [
+      "vitamina C",
+      "FPS 50"
+    ],
+    "tipo": "inedita",
+    "gerado": "O que é usado é a seguinte:\n\n```\n1. Ao usar o seguinte, o seu valor de valor de 100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "passou": false,
+    "erro": "faltou: vitamina C, FPS 50"
+  },
+  {
+    "familia": "manchas",
+    "tarefa": "Me recomende algo para manchas no rosto.",
+    "codigo": "Para manchas no rosto, use vitamina C de manhã, protetor solar FPS 50 todos os dias e ácido azelaico à noite.",
+    "testes": [
+      "vitamina C",
+      "FPS 50"
+    ],
+    "tipo": "inedita",
+    "gerado": "```\n# 1.\n# 2.\n# 3.\n# 4.\n# 5.\n# 6.\n# 7.\n# 8.\n# 9.\n# 10.\n# 11.\n# 12.\n# 13.\n# 14.\n# 15.\n# 16.\n# 17.\n# 18.\n# 19.\n# 20.\n# 21.\n# 22.\n# 23.\n# 24.\n# 25.\n# 26.",
+    "passou": false,
+    "erro": "faltou: vitamina C, FPS 50"
+  },
+  {
+    "familia": "linhas_finas",
+    "tarefa": "Me recomende algo para linhas finas.",
+    "codigo": "Para linhas finas, use retinol em baixa concentração à noite, hidratante com peptídeos e protetor solar todos os dias.",
+    "testes": [
+      "retinol",
+      "peptídeos"
+    ],
+    "tipo": "inedita",
+    "gerado": "```\n<NAME>\n```",
+    "passou": false,
+    "erro": "faltou: retinol, peptídeos"
+  },
+  {
+    "familia": "linhas_finas",
+    "tarefa": "Tenho linhas finas. O que devo usar?",
+    "codigo": "Para linhas finas, use retinol em baixa concentração à noite, hidratante com peptídeos e protetor solar todos os dias.",
+    "testes": [
+      "retinol",
+      "peptídeos"
+    ],
+    "tipo": "inedita",
+    "gerado": "O que é usado é a seguinte:\n\n```\n1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.",
+    "passou": false,
+    "erro": "faltou: retinol, peptídeos"
+  },
+  {
+    "familia": "linhas_finas",
+    "tarefa": "Tenho rugas finas. O que devo usar?",
+    "codigo": "Para rugas finas, use retinol em baixa concentração à noite, hidratante com peptídeos e protetor solar todos os dias.",
+    "testes": [
+      "retinol",
+      "peptídeos"
+    ],
+    "tipo": "inedita",
+    "gerado": "O que é usado?",
+    "passou": false,
+    "erro": "faltou: retinol, peptídeos"
+  },
+  {
+    "familia": "linhas_finas",
+    "tarefa": "Me recomende algo para rugas finas.",
+    "codigo": "Para rugas finas, use retinol em baixa concentração à noite, hidratante com peptídeos e protetor solar todos os dias.",
+    "testes": [
+      "retinol",
+      "peptídeos"
+    ],
+    "tipo": "inedita",
+    "gerado": "```\n# 1.\n# 2.\n# 3.\n# 4.\n# 5.\n# 6.\n# 7.\n# 8.\n# 9.\n# 10.\n# 11.\n# 12.\n# 13.\n# 14.\n# 15.\n# 16.\n# 17.\n# 18.\n# 19.\n# 20.\n# 21.\n# 22.\n# 23.\n# 24.\n# 25.\n# 26.",
+    "passou": false,
+    "erro": "faltou: retinol, peptídeos"
+  }
+]

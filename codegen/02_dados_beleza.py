@@ -21,8 +21,6 @@ Saída:
       "inedita"  = assunto que o modelo nunca viu (acne, manchas, linhas finas)
 
 Rodar:  python 02_dados_beleza.py
-AVISO: são categorias genéricas de produto, não marcas, e não substituem
-a orientação de um dermatologista.
 """
 import json
 import os

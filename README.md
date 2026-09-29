@@ -1,190 +1,235 @@
-# Laboratório SmolLM2 — Aulas 7 e 8
+# Assistente de Skincare com LLM local
 
-IA Generativa para Engenharia · RTX 3060 12 GB · VSCode
+Projeto acadêmico: fine-tuning de uma LLM pequena, rodando 100% localmente em
+GPU, para recomendar categorias de produto e rotinas de skincare por tipo de
+pele.
 
-Todos os scripts são `.py` com células `# %%`: rodam como notebook no VSCode
-(botão **Run Cell**) e como script no terminal, mas versionam bem no git —
-diferente de `.ipynb`.
+
+**Grupo:**
+- João Rodrigo Solano Nogueira — RM 551319
+- Julia Amorim Bezerra — RM 99609
+- Lana Giulia Auada Leite — RM 551143
+- Tony Willian da Silva Segalin — RM 550667
 
 ---
 
-## Passo a passo de instalação (Windows)
+## 1. LLM escolhida
 
-### 1. Confirme o driver
+**[SmolLM2-135M](https://huggingface.co/HuggingFaceTB/SmolLM2-135M)**, da
+Hugging Face.
 
+Por quê:
+- 135 milhões de parâmetros: cabe com folga em GPUs de notebook (testado em
+  uma **RTX 3050 Ti Laptop, 4 GB de VRAM**).
+- Fine-tuning completo (não só LoRA) é viável em segundos/poucos minutos por
+  rodada, o que permitiu testar várias combinações de hiperparâmetros.
+- Modelo aberto, roda 100% offline depois do primeiro download.
+
+## 2. Problema escolhido
+
+Um assistente que, a partir de um pedido em português, recomenda:
+- produto de limpeza, hidratante, protetor solar ou ativo para um tipo de
+  pele (oleosa, seca, mista, sensível, normal);
+- rotinas completas de manhã e de noite.
+
+A avaliação é objetiva: cada resposta esperada tem **palavras-chave**
+(ex.: "oil-free", "ceramidas", "retinol") e a resposta gerada só é
+considerada correta se contiver todas elas — o mesmo princípio de
+`assert`s do projeto de referência da disciplina, adaptado de código para
+texto.
+
+## 3. Dataset
+
+Gerado sinteticamente por `02_dados_beleza.py`, a partir de um dicionário de
+conhecimento (tipo de pele → produto/ativo recomendado) combinado com
+diferentes formas de pedir a mesma coisa.
+
+| Conjunto | Exemplos | Descrição |
+|---|---|---|
+| Treino | 330 | pedidos + resposta esperada |
+| Teste — variação | 30 | mesmo assunto do treino, pedido reformulado |
+| Teste — inédita | 12 | assuntos nunca vistos no treino (acne, manchas, linhas finas) |
+
+O conjunto "inédita" existe para medir **generalização real**, não
+memorização — mesma lógica usada no laboratório do professor (Aula 7,
+held-out fora do domínio).
+
+## 4. Testes de parâmetros
+
+Baseline e variações testadas com `07_varredura.py`, treinando o modelo do
+zero em cada rodada:
+
+| Config | Learning rate | Épocas | Lote | Tempo (s) | Loss teste | VRAM (GB) | Variação | Inédita | Total |
+|---|---|---|---|---|---|---|---|---|---|
+| baseline | 5e-5 | 3 | 8 | 57.3 | 1.374 | 3.08 | 100.0% | 8.3% | 73.8% |
+| lr_menor | 2e-5 | 3 | 8 | 56.4 | 1.194 | 3.08 | 100.0% | 0.0% | 71.4% |
+| lr_maior | 1e-4 | 3 | 8 | 56.3 | 1.533 | 3.08 | 100.0% | 8.3% | 73.8% |
+| mais_epocas | 5e-5 | 6 | 8 | 110.9 | 1.424 | 3.08 | 100.0% | 8.3% | 73.8% |
+| menos_epocas | 5e-5 | 1 | 8 | 18.7 | 1.282 | 3.08 | 20.0% | 0.0% | 14.3% |
+| lote_menor | 5e-5 | 3 | 4 | 81.5 | 1.143 | 2.64 | 100.0% | 0.0% | 71.4% |
+
+*(VRAM aqui é o pico de toda a rodada — treino + geração de todas as 42
+respostas de avaliação na sequência — por isso é maior que o pico de
+~0,5 GB medido só no treino em `04_treinar.py`.)*
+
+![Varredura de parâmetros](varredura.png)
+
+**Leitura dos resultados:**
+- **Épocas importam mais que learning rate, até um ponto.** Com só 1 época
+  (`menos_epocas`) o modelo não teve tempo de aprender o padrão: cai para
+  20% em variação e 14,3% no total — evidência de *underfitting*. A partir
+  de 3 épocas o modelo já satura em variação (100%), e ir para 6 épocas
+  (`mais_epocas`) não traz ganho algum, só dobra o tempo de treino.
+- **Learning rate teve pouco efeito no acerto**, mas mudou a loss final: LR
+  menor (2e-5) deixou a loss mais baixa (1.194) só porque o modelo decorou
+  menos as respostas de treino, mas isso não se refletiu no placar de
+  inéditas — que continuou em 0%.
+- **Lote menor (4) usou menos VRAM** (2.64 GB vs 3.08 GB) com resultado
+  equivalente ao lote 8, o que seria a escolha certa numa GPU ainda mais
+  limitada.
+- **Nenhuma configuração melhora o placar de "inédita"** de forma
+  consistente (fica entre 0% e 8,3%). Isso confirma o limite do
+  fine-tuning com dataset pequeno: ajustar hiperparâmetros otimiza o
+  quanto o modelo memoriza o que foi treinado, não o quanto ele
+  generaliza para assuntos nunca vistos (acne, manchas, linhas finas).
+  Generalização real exigiria mais dados de treino, não mais épocas ou LR
+  diferente.
+- **Configuração recomendada:** a baseline (LR 5e-5, 3 épocas, lote 8) já é
+  a melhor relação custo/benefício — mesmo resultado da config com 6
+  épocas, mas na metade do tempo.
+
+Execução completa da varredura (as 6 rodadas e a tabela final):
+
+![Varredura rodando](prints/varredura_run.png)
+
+## 5. Avaliação do modelo
+
+| | Total | Variação | Inédita |
+|---|---|---|---|
+| Modelo BASE (antes do treino) | 0/42 (0%) | 0/30 (0%) | 0/12 (0%) |
+| Modelo TREINADO (depois) | 31/42 (74%) | 30/30 (100%) | 1/12 (8%) |
+
+O modelo base não conhece o formato `### Pedido / ### Resposta` e gera
+texto solto ou repetitivo. Depois do fine-tuning, ele responde corretamente
+a praticamente todas as variações do que foi treinado.
+
+![Curva de loss](curva_loss.png)
+
+Execução da avaliação do modelo treinado (placar item a item):
+
+![Avaliação do modelo treinado](prints/avaliacao_treinado.png)
+
+## 6. GPU
+
+Todo o treino, a geração e a avaliação rodam com `torch.cuda`, verificado
+via `nvidia-smi` e pela própria saída dos scripts (`hardware: cuda ...`).
+
+- **GPU:** NVIDIA GeForce RTX 3050 Ti Laptop GPU, 4 GB VRAM
+- **Driver:** 572.60, CUDA 12.8
+- **PyTorch:** `2.11.0+cu128`
+- **VRAM de pico durante o treino:** ~0,5 GB (modelo de 135M, fp32)
+
+Print da instalação do PyTorch com CUDA e do início do
+`a7_00_smoke_test.py`, confirmando `torch.cuda.is_available()` e a GPU
+detectada:
+
+![Instalação e verificação do CUDA](prints/teste.png)
+
+Print do download do modelo pelo Hugging Face, na sequência do mesmo
+smoke test:
+
+![Download do modelo pelo smoke test](prints/teste2.png)
+
+Print do ambiente validado (`a7_00_smoke_test.py`, terminando em
+`AMBIENTE OK`):
+
+![Ambiente OK no VSCode](prints/ambiente_ok.png)
+
+Print do treino em execução, com `nvidia-smi` lado a lado mostrando a GPU
+em uso real (3913 MiB / 4096 MiB, GPU-Util 63%) e a loss caindo a cada
+passo:
+
+![Treino usando a GPU](prints/treino_gpu.png)
+
+## 7. Frontend
+
+Interface feita em [Gradio](https://www.gradio.app/) (`app_beleza.py`), que
+mostra a resposta do modelo BASE e do modelo TREINADO lado a lado, além do
+status da GPU (VRAM em uso, tempo de resposta).
+
+Rodar:
 ```powershell
-nvidia-smi
+python app_beleza.py
+```
+Abre em `http://127.0.0.1:7860`.
+
+![Frontend em uso](prints/frontend.png)
+
+---
+
+## Estrutura do repositório
+
+```
+cp_genai/
+├── requirements.txt
+├── config.py, utils.py, textos.py, ...        <- laboratório de referência (RAG), prova de GPU
+├── a7_*.py, a8_*.py
+└── codegen/
+    ├── 02_dados_beleza.py           gera o dataset
+    ├── 03_avaliar_beleza.py         avalia BASE ou TREINADO
+    ├── 04_treinar.py                fine-tuning (editado para o tema de skincare)
+    ├── 07_varredura.py              testa combinações de hiperparâmetros
+    ├── app_beleza.py                frontend (Gradio)
+    ├── dados/                       treino.jsonl, teste.jsonl
+    ├── resultados/                  base.json, modelo-treinado.json, varredura.json
+    ├── curva_loss.png
+    ├── varredura.png
+    └── modelo-treinado/             (gerado localmente, não versionado)
 ```
 
-Precisa aparecer `NVIDIA GeForce RTX 3060` e uma versão de CUDA.
-Esse número é a **versão máxima suportada pelo driver**, não a instalada —
-você não precisa instalar o CUDA Toolkit separado, o wheel do PyTorch já
-traz o runtime.
+## Como reproduzir
 
-### 2. Crie a pasta e o ambiente virtual
+Pré-requisitos: Python 3.10+, GPU NVIDIA com driver atualizado.
 
 ```powershell
-cd C:\Users\<voce>\Documents
-mkdir smollm2-lab
-cd smollm2-lab
-# copie os arquivos deste pacote para cá
-
+# 1. Ambiente
 python -m venv .venv
 .venv\Scripts\activate
 python -m pip install -U pip
-```
 
-O prompt deve passar a mostrar `(.venv)`. **Um venv por projeto, sempre.**
-
-### 3. Instale o PyTorch com CUDA — este é o passo que todo mundo erra
-
-```powershell
+# 2. PyTorch com CUDA (confira a versão certa para sua GPU em
+#    https://pytorch.org/get-started/locally/)
 pip install torch --index-url https://download.pytorch.org/whl/cu128
-```
 
-Confira o índice correto em <https://pytorch.org/get-started/locally/>
-(Windows · Pip · Python · CUDA).
-
-> ⚠️ `pip install torch` **sem** o `--index-url` instala a build CPU.
-> Foi exatamente o que aconteceu no notebook do Colab: `PyTorch: 2.11.0+cpu`,
-> `CUDA disponível: False`, e o treino de 12 steps levou 150 segundos.
-> Confira com `pip show torch` — se a versão termina em `+cpu`, desinstale e refaça.
-
-### 4. Instale o resto
-
-```powershell
+# 3. Demais bibliotecas
 pip install -r requirements.txt
-```
 
-### 5. Configure o VSCode
-
-1. `File → Open Folder` → escolha a pasta `smollm2-lab`
-   (o **workspace tem que ser esta pasta**, senão os `import config` falham)
-2. Extensões: **Python**, **Jupyter**, **Ruff** (opcional)
-3. `Ctrl+Shift+P` → `Python: Select Interpreter` → `.venv`
-4. Opcional, mas ótimo em aula: extensão **GPU monitor** na barra de status,
-   para projetar a VRAM enquanto treina
-
-### 6. Login no Hugging Face (opcional, recomendado)
-
-```powershell
-huggingface-cli login
-```
-
-Sem isso funciona, mas você leva o aviso *"You are sending unauthenticated
-requests"* e limite de taxa menor nos downloads.
-
-### 7. Valide
-
-```powershell
+# 4. Verificar o ambiente
 python a7_00_smoke_test.py
+
+# 5. Projeto de skincare
+cd codegen
+python 02_dados_beleza.py
+python 03_avaliar_beleza.py                  # placar do modelo base
+python 04_treinar.py                          # treina o modelo
+python 03_avaliar_beleza.py modelo-treinado  # placar do modelo treinado
+python 07_varredura.py                        # teste de parâmetros (opcional, demorado)
+python app_beleza.py                          # frontend
 ```
 
-Precisa terminar com `=== AMBIENTE OK ===`.
+## Limitações conhecidas
 
----
+- Modelo pequeno (135M) treinado com poucos exemplos (~330): generaliza mal
+  para assuntos fora do treino (8% em "inédita").
+- As respostas são categorias genéricas de produto/ativo, não recomendações
+  de marca nem substituto de avaliação dermatológica.
+- Avaliação por palavras-chave é uma aproximação simples (como no gabarito
+  do laboratório de referência): mede se o conteúdo certo apareceu, não a
+  qualidade da escrita.
 
-## Ordem de execução
+## Referências
 
-### Aula 7 — do Colab para a sua GPU
-
-| # | Script | O que faz | Tempo na 3060 |
-|---|---|---|---|
-| 0 | `a7_00_smoke_test.py` | GPU, bibliotecas, download do modelo | ~2 min (1ª vez) |
-| 1 | `a7_01_anatomia.py` | arquitetura, config, parâmetros, VRAM, tokenização | ~1 min |
-| 2 | `a7_02_baseline.py` | **medir antes de treinar** | ~1 min |
-| 3 | `a7_03_ft_ingenuo.py` | réplica fiel do notebook do Colab | ~1 min |
-| 4 | `a7_04_ft_correto.py` | o mesmo, com método correto | ~2 min |
-| 5 | `a7_05_lora.py` | LoRA: conta, mecânica, comparação | ~3 min |
-| 6 | `a7_06_esquecimento.py` | curva de esquecimento → `runs/esquecimento.png` | ~8 min |
-
-### Aula 8 — ensinando os seus arquivos
-
-**Antes de tudo:** coloque os PDFs (decks das aulas 1 a 6) em `corpus/` e rode:
-
-```powershell
-python prep_corpus.py
-```
-
-Depois escreva o seu gabarito em `data/gabarito.json`
-(copie a estrutura de `data/gabarito.example.json` — **20 perguntas**, sendo
-umas 4 do tipo `armadilha`, cuja resposta certa é "não sei").
-
-| # | Script | O que faz | Tempo na 3060 |
-|---|---|---|---|
-| 7 | `a8_07_rota1_contexto.py` | jogar o arquivo no prompt; os 3 limites | ~4 min |
-| 8 | `a8_08_rota2_rag.py` | RAG completo: chunk → embedding → FAISS → resposta | ~6 min |
-| 9 | `a8_09_rota3_sft.py` | gera pares Q&A e treina LoRA no 1.7B | ~25 min |
-| 10 | `a8_10_rota4_dapt.py` | continued pretraining sobre o texto cru | ~15 min |
-| 11 | `a8_11_rota5_tools.py` | extração estruturada + function calling | ~5 min |
-| 12 | `a8_12_bakeoff.py` | tabela e gráfico comparativos → `runs/bakeoff.png` | segundos |
-
-Os tempos são estimativas para uma 3060 com ~9,5 GB livres. O primeiro
-download do `SmolLM2-1.7B-Instruct` (3,4 GB) não está contado — **faça antes
-da aula**, não com 40 alunos no mesmo Wi-Fi.
-
----
-
-## Orçamento de VRAM
-
-Sua placa tem 12.288 MiB, mas o Windows e o navegador já consomem ~2.300 MiB.
-**O orçamento real é ~9,7 GB.**
-
-Regra de bolso — **bytes por parâmetro**:
-
-| modo | bytes/param | 135M | 360M | 1.7B |
-|---|---|---|---|---|
-| inferência bf16 | 2 | 0,3 GB | 0,7 GB | 3,2 GB |
-| inferência 4-bit | 0,6 | 0,1 GB | 0,2 GB | 1,0 GB |
-| **fine-tuning completo** | **16** | 2,0 GB | 5,4 GB | **25,5 GB ❌** |
-| LoRA (base bf16) | 2 + ε | 0,3 GB | 0,7 GB | 3,2 GB ✅ |
-| QLoRA (base 4-bit) | 0,6 + ε | — | — | 1,0 GB ✅ |
-
-Some 1–3 GB de ativações. É por isso que a disciplina usa LoRA.
-
----
-
-## Se der errado
-
-| Sintoma | Causa e correção |
-|---|---|
-| `CUDA available: False` | wheel CPU do PyTorch → reinstale com `--index-url` (passo 3) |
-| `CUDA out of memory` | reduza `per_device_train_batch_size` para 1 e aumente `gradient_accumulation_steps`; depois `max_length`; depois ligue `gradient_checkpointing=True` |
-| `ModuleNotFoundError: config` | o VSCode não está com a pasta do projeto como workspace root |
-| `ImportError: bitsandbytes` | Windows nativo — use LoRA em bf16 (faz tudo que a disciplina precisa) ou rode via WSL2 |
-| Download lento / 429 | `huggingface-cli login` |
-| `TrainingArguments` reclama de `eval_strategy` | transformers antigo → `pip install -U transformers` |
-| Treino lento com GPU ociosa | `dataloader_num_workers=0` no Windows; verifique se `bf16=True` está ativo |
-
----
-
-## Reprodutibilidade (para distribuir aos alunos)
-
-Depois que o ambiente estiver funcionando na sua máquina:
-
-```powershell
-pip freeze > requirements.lock.txt
-```
-
-Distribua o `.lock` para a turma. Assim os 40 alunos rodam exatamente as
-mesmas versões, e "funciona na minha máquina" deixa de ser uma variável do
-experimento.
-
----
-
-## Estrutura
-
-```
-smollm2-lab/
-├── config.py            caminhos, seed, device, modelos — fonte única de verdade
-├── utils.py             carregar, gerar, chat, perplexidade, medir VRAM/tempo
-├── textos.py            frases de treino e conjuntos held-out (Aula 7)
-├── rag.py               índice FAISS, busca densa, busca híbrida (Aula 8)
-├── avaliacao.py         gabarito, pontuação, métricas — igual para todas as rotas
-├── prep_corpus.py       PDFs -> data/corpus.jsonl + data/chunks.jsonl
-├── a7_*.py              experimentos da Aula 7
-├── a8_*.py              experimentos da Aula 8
-├── corpus/              << você coloca os PDFs aqui
-├── data/                datasets e gabarito
-└── runs/                saídas, adaptadores, índice, gráficos (gitignored)
-```
+- ALLAL, L. B. et al. *SmolLM2: When Smol Goes Big — Data-Centric Training
+  of a Small Language Model*. arXiv:2502.02737, 2025.
+- HUGGING FACE. Transformers — documentação oficial. huggingface.co/docs
+- PYTORCH. Get Started Locally. pytorch.org/get-started/locally
