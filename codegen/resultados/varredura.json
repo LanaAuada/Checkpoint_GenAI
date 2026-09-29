@@ -1,0 +1,74 @@
+[
+  {
+    "nome": "baseline",
+    "lr": 5e-05,
+    "epocas": 3,
+    "lote": 8,
+    "tempo_s": 57.3,
+    "loss_teste": 1.374,
+    "vram_gb": 3.08,
+    "variacao_pct": 100.0,
+    "inedita_pct": 8.3,
+    "total_pct": 73.8
+  },
+  {
+    "nome": "lr_menor",
+    "lr": 2e-05,
+    "epocas": 3,
+    "lote": 8,
+    "tempo_s": 56.4,
+    "loss_teste": 1.194,
+    "vram_gb": 3.08,
+    "variacao_pct": 100.0,
+    "inedita_pct": 0.0,
+    "total_pct": 71.4
+  },
+  {
+    "nome": "lr_maior",
+    "lr": 0.0001,
+    "epocas": 3,
+    "lote": 8,
+    "tempo_s": 56.3,
+    "loss_teste": 1.533,
+    "vram_gb": 3.08,
+    "variacao_pct": 100.0,
+    "inedita_pct": 8.3,
+    "total_pct": 73.8
+  },
+  {
+    "nome": "mais_epocas",
+    "lr": 5e-05,
+    "epocas": 6,
+    "lote": 8,
+    "tempo_s": 110.9,
+    "loss_teste": 1.424,
+    "vram_gb": 3.08,
+    "variacao_pct": 100.0,
+    "inedita_pct": 8.3,
+    "total_pct": 73.8
+  },
+  {
+    "nome": "menos_epocas",
+    "lr": 5e-05,
+    "epocas": 1,
+    "lote": 8,
+    "tempo_s": 18.7,
+    "loss_teste": 1.282,
+    "vram_gb": 3.08,
+    "variacao_pct": 20.0,
+    "inedita_pct": 0.0,
+    "total_pct": 14.3
+  },
+  {
+    "nome": "lote_menor",
+    "lr": 5e-05,
+    "epocas": 3,
+    "lote": 4,
+    "tempo_s": 81.5,
+    "loss_teste": 1.143,
+    "vram_gb": 2.64,
+    "variacao_pct": 100.0,
+    "inedita_pct": 0.0,
+    "total_pct": 71.4
+  }
+]
