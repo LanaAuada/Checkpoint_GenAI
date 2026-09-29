@@ -72,7 +72,7 @@ zero em cada rodada:
 respostas de avaliação na sequência — por isso é maior que o pico de
 ~0,5 GB medido só no treino em `04_treinar.py`.)*
 
-![Varredura de parâmetros](varredura.png)
+![Varredura de parâmetros](codegen/varredura.png)
 
 **Leitura dos resultados:**
 - **Épocas importam mais que learning rate, até um ponto.** Com só 1 época
@@ -113,7 +113,7 @@ O modelo base não conhece o formato `### Pedido / ### Resposta` e gera
 texto solto ou repetitivo. Depois do fine-tuning, ele responde corretamente
 a praticamente todas as variações do que foi treinado.
 
-![Curva de loss](curva_loss.png)
+![Curva de loss](codegen/curva_loss.png)
 
 Execução da avaliação do modelo treinado (placar item a item):
 
