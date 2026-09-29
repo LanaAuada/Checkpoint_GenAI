@@ -33,3 +33,5 @@ bitsandbytes>=0.44 ; platform_system != "Darwin"
 
 # opcional — JSON garantido por decodificação restrita (Aula 8, Rota 5)
 # outlines>=0.1
+
+gradio
